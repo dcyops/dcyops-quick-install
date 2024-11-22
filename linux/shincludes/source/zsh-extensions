@@ -1,0 +1,15 @@
+local PATHS=(
+	"$HOME/.zsh/plugins/zsh/zsh-syntax-highlighting.zsh"
+        "$HOME/.zsh/plugins/zsh/zsh-autosuggestions.zsh"
+	"$HOME/.zsh/plugins/zsh/zsh-autopair/autopair.zsh"
+        "$HOME/.zsh/plugins/fzf/fzf.zsh"
+)
+
+for file in "${PATHS[@]}"; do
+	[ -f "$file" ] && source "$file"
+done
+
+ZSH_AUTOSUGGEST_MANUAL_REBIND=1  # performance boost
+ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=64
+
+unset PATHS

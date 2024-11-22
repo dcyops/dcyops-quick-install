@@ -1,0 +1,59 @@
+# load firewall config with iptables-restore < iptables.rules
+
+*filter
+
+# Exclude mDNS Traffic (Accept without logging)
+-A INPUT -p udp --dport 5353 -d 224.0.0.251 -j ACCEPT
+
+# 2: Set default DROP policy
+:INPUT DROP [0:0]
+:FORWARD DROP [0:0]
+:OUTPUT DROP [0:0]
+
+# 3: Accept any related or established connection
+-A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
+-A OUTPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
+
+# 4: Allow all traffic on the loopback interface
+-A INPUT -i lo -j ACCEPT
+-A OUTPUT -o lo -j ACCEPT
+
+# 5: Allow outbound DHCP requests
+-I OUTPUT -p udp --dport 67:68 --sport 67:68 -j LOG --log-prefix "OUTGOING DHCP REQUEST " --log-level 1
+-A OUTPUT -p udp --dport 67:68 --sport 67:68 -j ACCEPT
+
+# 6: Allow outbound DNS lookups
+-I OUTPUT -p udp --dport 53 -j LOG --log-prefix "OUTGOING DNS LOOKUP " --log-level 1
+-A OUTPUT -p udp --dport 53 -j ACCEPT
+
+# 7: Allow outbound ping requests
+-A OUTPUT -p icmp -j ACCEPT
+
+# 8: Allow outbound NTP requests
+-I OUTPUT -p udp --dport 123 --sport 123 -m limit --limit 5/min -j LOG --log-prefix "OUTGOING NTP REQUEST " --log-level 1
+-A OUTPUT -p udp --dport 123 --sport 123 -j ACCEPT
+
+# 9: Allow outbound HTTP/HTTPS requests
+-I OUTPUT -p tcp --dport 80 -m state --state NEW,ESTABLISHED -j LOG --log-prefix "OUTGOING HTTP REQUEST " --log-level 1
+-A OUTPUT -p tcp --dport 80 -j ACCEPT
+#-I OUTPUT -p tcp --dport 443 -m state --state NEW,ESTABLISHED -j LOG --log-prefix "OUTGOING HTTPS CONNECTION " --log-level 1
+-A OUTPUT -p tcp --dport 443 -j ACCEPT
+
+# 10: Allow outbound SSH connections
+-I OUTPUT -p tcp --dport 22 -m state --state NEW,ESTABLISHED -m limit --limit 5/min -j LOG --log-prefix "OUTGOING SSH CONNECTION " --log-level 1
+-A OUTPUT -p tcp -m tcp --dport 22 -j ACCEPT
+
+# 11: Log and drop known nmap scans
+-I INPUT -p tcp --tcp-flags ALL ALL -m limit --limit 5/min -j LOG --log-prefix "DROPPED XMAS PACKET " --log-level 1
+-A INPUT -p tcp --tcp-flags ALL ALL -j DROP
+-I INPUT -p tcp --tcp-flags ALL NONE -m limit --limit 5/min -j LOG --log-prefix "DROPPED NULL PACKET " --log-level 1
+-A INPUT -p tcp --tcp-flags ALL NONE -j DROP
+-I INPUT -p tcp --tcp-flags SYN,FIN SYN,FIN -m limit --limit 5/min -j LOG --log-prefix "DETECTED SYN-FIN SCAN " --log-level 1
+-A INPUT -p tcp --tcp-flags SYN,FIN SYN,FIN -j DROP
+
+# 12: Enable logging for denied and dropped packets
+-I INPUT -m limit --limit 10/min -j LOG --log-prefix "DENIED " --log-level 1
+-I INPUT -m limit --limit 10/min -j LOG --log-prefix "DROPPED " --log-level 1
+
+# Commit changes
+COMMIT

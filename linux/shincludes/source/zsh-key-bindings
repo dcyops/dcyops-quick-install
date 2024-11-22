@@ -1,0 +1,10 @@
+bindkey "^F" backward-word
+bindkey "^K" forward-word
+bindkey "^J" end-of-history
+bindkey "^P" up-history
+bindkey "^N" down-history
+bindkey "^I" complete-word
+bindkey "^A" beginning-of-line
+bindkey "^E" end-of-line
+
+stty intr '^G' # ^C is used for copying

@@ -1,0 +1,73 @@
+[ -z "${ID+x}" ] && source /etc/os-release
+
+# depends: apt-file
+{[ "${ID}" = "ubuntu" ] || [ "${ID}" = "debian" ] || [ "${ID_LIKE}" = "debian" ]} && {
+  alias update='sudo apt update && sudo apt -y full-upgrade'
+  alias ainstall='sudo apt install -y'
+  alias asearch='sudo apt-cache search'
+  alias remove='sudo apt -y purge'
+  alias lpn='dpkg -S'
+  alias lpf='dpkg -L'
+  alias lp='dpkg -l'
+  alias ap='apropos'
+
+  function whatprovides {
+    for file in $@; do
+      apt-file find -x "/${file}\$"
+    done
+  }
+}
+
+# depends: tmux
+alias tconf="vim ~/.tmux.conf"
+alias srctmux="tmux source-file ~/.tmux.conf"
+
+# depends: zsh
+alias edzsh="vim ~/.zshrc.pre"
+alias srczsh="source ~/.zshrc.pre"
+
+alias diff='diff --color --side-by-side --brief --paginate'
+alias dot='cd $DOTFILES'
+alias re='cd $GHREPOS/RE'
+alias rps='cd $GHREPOS'
+
+#alias less='less -FXR'
+alias ip='ip -h -c' 
+alias ipa='ip -br a' 
+alias dir='dir --color=auto'
+alias vdir='vdir --color=auto'
+alias grep='grep --color=auto'
+alias df='duf'
+
+alias lc='fc -ln -1 | xsel --clipboard'
+alias tmp='cd $(mktemp -d)'
+
+# depends: batcat/bat
+# https://github.com/sharkdp/bat
+alias -g -- -h='-h 2>&1 | bat --language=help --style=plain --theme zenburn'
+alias -g -- --help='--help 2>&1 | bat --language=help --style=plain --theme zenburn'
+alias cat='bat -pp --theme zenburn'
+
+# depends: python3 virtualenv
+alias vd='deactivate'
+
+# depends: eza
+alias ls='eza --icons'
+alias lst='tree .'
+
+# depends: lynx
+alias '?'=duck
+alias '??'=sgpt
+alias '???'=google
+
+# depends: git
+alias nocm='git commit -a --allow-empty-message -m ""'
+alias lazygit='git stage .; git commit -a --allow-empty-message -m ""; git push'
+alias gifile='git update-index --assume-unchanged'
+
+# depends: curlie
+# https://github.com/rs/curlie
+alias curl='curlie -OL --pretty'
+
+alias bgr='systemd-run --user -d --' # run a user-level service in the background(independent of the shell session)
+alias clear-logs='sudo /bin/sh -c "journalctl --rotate && journalctl --vacuum-time=1s"'

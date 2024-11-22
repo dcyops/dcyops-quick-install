@@ -1,0 +1,37 @@
+BasedOnStyle: LLVM
+IndentWidth: 4
+TabWidth: 4
+UseTab: Never
+ColumnLimit: 0
+BraceWrapping:
+  AfterFunction: true
+  AfterControlStatement: true
+  AfterClass: false
+  AfterEnum: false
+  AfterStruct: false
+  AfterUnion: false
+  BeforeElse: true
+  BeforeCatch: true
+  IndentBraces: false
+  AfterCaseLabel: true
+SpaceBeforeParens: ControlStatements
+SpacesInParentheses: false
+SpacesInSquareBrackets: false
+SpacesInAngles: false
+SpaceAfterCStyleCast: true
+SpaceAfterTemplateKeyword: false
+SpaceBeforeAssignmentOperators: true
+AllowShortFunctionsOnASingleLine: Empty
+AlignConsecutiveAssignments: true
+SortIncludes: false
+CommentPragmas: '^\/\*'
+IndentCaseLabels: true
+BreakBeforeBraces: Custom
+AlignTrailingComments: true
+AlwaysBreakAfterReturnType: All
+SpaceBeforeCaseColon: false
+AllowShortIfStatementsOnASingleLine: false
+PenaltyReturnTypeOnItsOwnLine: 100
+IndentGotoLabels: true
+IndentWrappedFunctionNames: false  # This line is important
+

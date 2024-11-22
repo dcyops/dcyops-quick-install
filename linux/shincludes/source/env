@@ -1,0 +1,50 @@
+whence -p vim > /dev/null && export EDITOR=vim || true
+
+# prettier time format
+export TIMEFMT=$'cpu %P | usr %*U | sys %*S | tot %*E'
+
+export PATH="$PATH:$HOME/.local/bin"
+
+export PATH="$HOME/.local/opt/emacs/bin:$HOME/.config/emacs/bin:$PATH"
+
+# depends: cargo
+export PATH="$PATH:$HOME/.cargo/bin"
+
+# depends: fzf fdfind batcat
+export FZF_DEFAULT_COMMAND="fdfind -H | fzf-tmux -p --reverse"
+export FZF_DEFAULT_OPTS="--preview 'bat --style numbers,changes --color=always {} | head -n 500'"
+export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
+  --color=fg:#AEA79A,fg+:#d0d0d0,bg:#121212,bg+:#262626
+  --color=hl:#8D8346,hl+:#AEA79A,info:#647D72,marker:#87ff00
+  --color=prompt:#d0d0d0,spinner:#af5fff,pointer:#D55F5E,header:#F5FAEB
+  --color=gutter:#121212,border:#262626,label:#aeaeae,query:#d9d9d9
+  --border="rounded" --border-label="󰱽" --border-label-pos="2" --preview-window="border-bold"
+  --prompt="∷ " --marker=">" --pointer="▶" --separator="-"
+  --scrollbar="│" --layout="reverse"'
+[ -f "${HOME}/.fzf.zsh" ] && . "${HOME}/.fzf.zsh"
+
+
+# https://github.com/sharkdp/bat/issues/3053
+export MANPAGER="sh -c 'sed -u -e \"s/\\x1B\[[0-9;]*m//g; s/.\\x08//g\" | bat -p -lman'"
+
+# depends: github.com/0xacx/chatGPT-shell-cli
+export OPENAI_KEY="${OPENAI_KEY}"
+
+# depends: github.com/aGVsbG8sIHRoZXJl
+export GITUSER="aGVsbG8sIHRoZXJl"
+export REPOS="$HOME/.Repos"
+export GHREPOS="$REPOS/github.com/$GITUSER"
+export DOTFILES="$GHREPOS/dcyops-quick-install"
+
+# depends: nvm, nodejs
+export PATH="$PATH:$(find $HOME/.nvm/versions/node/ -type d -name 'v*' | sort -V | tail -n 1)/bin"
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+
+
+
+# depends: gcc
+export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
+
+# depends: emacs compiled with xwidget support
+export WEBKIT_DISABLE_COMPOSITING_MODE=1

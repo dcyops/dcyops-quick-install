@@ -1,0 +1,8 @@
+# Case insensitive matching
+zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}'
+
+# Auto cd if you just type the folder name
+setopt autocd
+
+# Enable beep
+setopt beep

@@ -1,0 +1,4 @@
+px()
+{
+  sudo procs -- -s $@
+}

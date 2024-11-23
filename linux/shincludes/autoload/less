@@ -1,0 +1,3 @@
+less() {
+    bat --paging=always --italic-text=always --style=snip --color=always "$@" | command less -R
+}

@@ -5,7 +5,7 @@
   alias update='sudo apt update && sudo apt -y full-upgrade'
   alias ainstall='sudo apt install -y'
   alias asearch='sudo apt-cache search'
-  alias remove='sudo apt -y purge'
+  alias remove='sudo apt -y remove'
   alias lpn='dpkg -S'
   alias lpf='dpkg -L'
   alias lp='dpkg -l'
@@ -32,7 +32,7 @@ alias re='cd $GHREPOS/RE'
 alias rps='cd $GHREPOS'
 
 #alias less='less -FXR'
-alias ip='ip -h -c' 
+alias ip='ip -c' 
 alias ipa='ip -br a' 
 alias dir='dir --color=auto'
 alias vdir='vdir --color=auto'
@@ -46,14 +46,13 @@ alias tmp='cd $(mktemp -d)'
 # https://github.com/sharkdp/bat
 alias -g -- -h='-h 2>&1 | bat --language=help --style=plain --theme zenburn'
 alias -g -- --help='--help 2>&1 | bat --language=help --style=plain --theme zenburn'
-alias cat='bat -pp --theme zenburn'
 
 # depends: python3 virtualenv
 alias vd='deactivate'
 
 # depends: eza
-alias ls='eza --icons'
-alias lst='tree .'
+alias ltr='eza -snew --icons -og --long --tree --level=2'
+alias ls='eza -snew --icons -og --long'
 
 # depends: lynx
 alias '?'=duck

@@ -1,0 +1,8 @@
+tail() {
+    if [[ $1 == "-f" ]]; then
+        command tail -f "$2" | bat --paging=never --italic-text=always --style=snip -l log --theme zenburn 
+    else
+        command tail "$@"    | bat --paging=never --italic-text=always --style=snip -l log --theme zenburn
+    fi
+}
+

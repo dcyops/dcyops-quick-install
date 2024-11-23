@@ -1,3 +1,10 @@
+# Replace `forward-word` with `emacs-forward-word` for more accurate word boundaries
+zle -A emacs-forward-word forward-word
+# Replace `backward-word` with `emacs-backward-word` for more accurate word boundaries
+zle -A emacs-backward-word backward-word
+
+
+
 bindkey "^F" backward-word
 bindkey "^K" forward-word
 bindkey "^J" end-of-history

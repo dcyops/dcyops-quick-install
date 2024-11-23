@@ -5,8 +5,6 @@ export TIMEFMT=$'cpu %P | usr %*U | sys %*S | tot %*E'
 
 export PATH="$PATH:$HOME/.local/bin"
 
-export PATH="$HOME/.local/opt/emacs/bin:$HOME/.config/emacs/bin:$PATH"
-
 # depends: cargo
 export PATH="$PATH:$HOME/.cargo/bin"
 
@@ -22,7 +20,6 @@ export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
   --prompt="∷ " --marker=">" --pointer="▶" --separator="-"
   --scrollbar="│" --layout="reverse"'
 [ -f "${HOME}/.fzf.zsh" ] && . "${HOME}/.fzf.zsh"
-
 
 # https://github.com/sharkdp/bat/issues/3053
 export MANPAGER="sh -c 'sed -u -e \"s/\\x1B\[[0-9;]*m//g; s/.\\x08//g\" | bat -p -lman'"
@@ -40,8 +37,6 @@ export DOTFILES="$GHREPOS/dcyops-quick-install"
 export PATH="$PATH:$(find $HOME/.nvm/versions/node/ -type d -name 'v*' | sort -V | tail -n 1)/bin"
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
-
-
 
 # depends: gcc
 export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'

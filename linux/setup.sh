@@ -1,54 +1,32 @@
 #!/usr/bin/env bash
 
-_LOGFILE_PATH="/tmp/quick-install.log"
+set -e
+trap 'echo "Error on line $LINENO: $BASH_COMMAND returned $?" | tee -a "${LOGFILE}"' ERR
 
-banner() {
-printf "+------------------------------------------+"
-printf "| %-40s |\n" "`date`"
-printf "|                                          |"
-printf "|`tput bold` %-40s `tput sgr0`|\n" "$@"
-printf "+------------------------------------------+"
-}
+SCRIPT_PATH="$(dirname "$(readlink -f "$0")")"
+LOGFILE="/tmp/quick-install.log"
+DIRS=(
+    "${HOME}/.local"
+    "${HOME}/.local/src"
+    "${HOME}/.local/share"
+    "${HOME}/.local/bin"
+    "${HOME}/.config"
+)
+readonly LOGFILE DIRS SCRIPT_PATH
+mkdir -p "${DIRS[@]}" 2>/dev/null
 
-touch "${_LOGFILE_PATH}"
-chmod 777 "${_LOGFILE_PATH}"
+# Cleanup existing symlinks
+find "${HOME}/.config/" "${HOME}/.local/bin" "${HOME}/.cargo/bin" -type l -exec rm {} + 2>/dev/null
+find "${HOME}" -type l \( -name '.zshrc' -o -name '.zshrc.local' \) -exec rm {} + 2>/dev/null
 
-mkdir "${HOME}/.local"       2>/dev/null
-mkdir "${HOME}/.local/src"   2>/dev/null
-mkdir "${HOME}/.local/share" 2>/dev/null
-mkdir "${HOME}/.local/bin"   2>/dev/null
-mkdir "${HOME}/.config"      2>/dev/null
+for SCRIPT in "${SCRIPT_PATH}/install/"*; do
+    printf "+------------------------------------------+\n"
+    printf "| %-40s |\n" "$(date)"
+    printf "|                                          |\n"
+    printf "|\033[1m %-40s \033[0m|\n" "${SCRIPT}"
+    printf "+------------------------------------------+\n" | tee -a "${LOGFILE}"
 
-find "${HOME}/.config/"   -type l -exec rm {} + 2>/dev/null
-find "${HOME}/.local/bin" -type l -exec rm {} + 2>/dev/null
-find "${HOME}/.cargo/bin" -type l -exec rm {} + 2>/dev/null
-find "${HOME}" -type l -name '.zshrc' -name '.zshrc.local' -exec rm {} + 2>/dev/null
-
-banner '01_install-most-stuff-with-apt'     | tee --append "${_LOGFILE_PATH}"
-bash install/01_install-most-stuff-with-apt | tee --append "${_LOGFILE_PATH}"
-
-banner '02_install-ansible'     | tee --append "${_LOGFILE_PATH}"
-bash install/02_install-ansible | tee --append "${_LOGFILE_PATH}"
-
-banner '03_install-node'     | tee --append "${_LOGFILE_PATH}"
-bash install/03_install-node | tee --append "${_LOGFILE_PATH}"
-
-banner '04_install-zsh'     | tee --append "${_LOGFILE_PATH}"
-bash install/04_install-zsh | tee --append "${_LOGFILE_PATH}"
-
-banner '05_install-terraform'     | tee --append "${_LOGFILE_PATH}"
-bash install/05_install-terraform | tee --append "${_LOGFILE_PATH}"
-
-banner '06_install-lynx'     | tee --append "${_LOGFILE_PATH}"
-bash install/06_install-lynx | tee --append "${_LOGFILE_PATH}"
-
-banner '07_install-tmux'     | tee --append "${_LOGFILE_PATH}"
-bash install/07_install-tmux | tee --append "${_LOGFILE_PATH}"
+    $SCRIPT | tee -a "${LOGFILE}"
+done
 
 
-# https://github.com/sharkdp/bat
-ln -s /usr/bin/batcat ~/.local/bin/bat
-
-#bash config/setup.sh
-
-unset _LOGFILE_PATH

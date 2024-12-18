@@ -338,6 +338,9 @@ getforms ()   { perl -ne 'while ( m:(\</?(input|form|select|option).*?\>):gic ) 
 #vimpm ()      { vim `perldoc -l $1 | sed -e 's/pod$/pm/'` }
 #vimhelp ()    { vim -c "help $1" -c on -c "au! VimEnter *" }
 
-. "$HOME/.Repos/github.com/aGVsbG8sIHRoZXJl/dcyops-quick-install/linux/shincludes/include.sh"
+. "$HOME/.Repos/github.com/dcyops/dcyops-quick-install/linux/shincludes/include.sh"
+export EZA_CONFIG_DIR=/home/user/.config/eza
+
+alias vim=/usr/bin/nvim
 
 ## END OF FILE #################################################################

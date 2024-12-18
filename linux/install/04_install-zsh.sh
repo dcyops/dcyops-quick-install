@@ -32,11 +32,11 @@ git clone --depth 1 https://github.com/junegunn/fzf.git "${HOME}/.zsh/plugins/fz
 "${HOME}/.zsh/plugins/fzf/install"
 
 printf "\n[*] Creating symbolic links for Zsh configuration files...\n"
-ln -sfv "${HOME}/.Repos/github.com/aGVsbG8sIHRoZXJl/dcyops-quick-install/linux/config/zsh/zshrc" "${HOME}/.zshrc"
-ln -sfv "${HOME}/.Repos/github.com/aGVsbG8sIHRoZXJl/dcyops-quick-install/linux/config/zsh/zshrc.local" "${HOME}/.zshrc.local"
+ln -sfv "${HOME}/.Repos/github.com/dcyops/dcyops-quick-install/linux/config/zsh/zshrc" "${HOME}/.zshrc"
+ln -sfv "${HOME}/.Repos/github.com/dcyops/dcyops-quick-install/linux/config/zsh/zshrc.local" "${HOME}/.zshrc.local"
 
-sudo ln -sfv "${HOME}/.Repos/github.com/aGVsbG8sIHRoZXJl/dcyops-quick-install/linux/config/zsh/root_zshrc" "/root/.zshrc"
-sudo ln -sfv "${HOME}/.Repos/github.com/aGVsbG8sIHRoZXJl/dcyops-quick-install/linux/config/zsh/root_zshrc.local" "/root/.zshrc.local"
+sudo ln -sfv "${HOME}/.Repos/github.com/dcyops/dcyops-quick-install/linux/config/zsh/root_zshrc" "/root/.zshrc"
+sudo ln -sfv "${HOME}/.Repos/github.com/dcyops/dcyops-quick-install/linux/config/zsh/root_zshrc.local" "/root/.zshrc.local"
 
 printf "[*] Setting zsh as the default shell\n"
 chsh -s /usr/bin/zsh

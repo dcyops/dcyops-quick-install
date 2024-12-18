@@ -11,7 +11,7 @@ rm -rf "${HOME}/.tmux.conf" 2>/dev/null
 
 mkdir -p "${HOME}/.tmux/plugins"
 
-ln -sfv "${HOME}/.Repos/github.com/aGVsbG8sIHRoZXJl/dcyops-quick-install/linux/config/tmux/tmux.conf" "${HOME}/.tmux.conf"
+ln -sfv "${HOME}/.Repos/github.com/dcyops/dcyops-quick-install/linux/config/tmux/tmux.conf" "${HOME}/.tmux.conf"
 
 printf "\n[*] Cloning Tmux Plugin Manager (TPM)...\n"
 git clone https://github.com/tmux-plugins/tpm "${HOME}/.tmux/plugins/tpm" || 

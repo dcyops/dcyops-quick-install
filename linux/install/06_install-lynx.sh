@@ -10,11 +10,11 @@ mkdir "${HOME}/.local/bin" 2>/dev/null
 
 printf "\n[*] Creating symbolic links...\n"
 
-ln -sfv "${HOME}/.Repos/github.com/aGVsbG8sIHRoZXJl/dcyops-quick-install/linux/config/lynx/bin/google" "${HOME}/.local/bin/google" ||
+ln -sfv "${HOME}/.Repos/github.com/dcyops/dcyops-quick-install/linux/config/lynx/bin/google" "${HOME}/.local/bin/google" ||
 	{ printf "\n[!] Error creating symbolic link for 'google'. Exiting...\n"; exit 1; }
 
-ln -sfv "${HOME}/.Repos/github.com/aGVsbG8sIHRoZXJl/dcyops-quick-install/linux/config/lynx/bin/duck" "${HOME}/.local/bin/duck" || 
+ln -sfv "${HOME}/.Repos/github.com/dcyops/dcyops-quick-install/linux/config/lynx/bin/duck" "${HOME}/.local/bin/duck" || 
 	{ printf "\n[!] Error creating symbolic link for 'duck'. Exiting...\n"; exit 1; }
 
-ln -sfv "${HOME}/.Repos/github.com/aGVsbG8sIHRoZXJl/dcyops-quick-install/linux/config/lynx/bin/lynx" "${HOME}/.local/bin/lynx" || 
+ln -sfv "${HOME}/.Repos/github.com/dcyops/dcyops-quick-install/linux/config/lynx/bin/lynx" "${HOME}/.local/bin/lynx" || 
 	{ printf "\n[!] Error creating symbolic link for 'lynx'. Exiting...\n"; exit 1; }

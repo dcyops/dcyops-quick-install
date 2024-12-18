@@ -25,10 +25,10 @@ export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
 export MANPAGER="sh -c 'sed -u -e \"s/\\x1B\[[0-9;]*m//g; s/.\\x08//g\" | bat -p -lman'"
 
 # depends: github.com/0xacx/chatGPT-shell-cli
-export OPENAI_KEY="${OPENAI_KEY}"
+#export OPENAI_KEY="${OPENAI_KEY}"
 
-# depends: github.com/aGVsbG8sIHRoZXJl
-export GITUSER="aGVsbG8sIHRoZXJl"
+# depends: github.com/dcyops
+export GITUSER="dcyops"
 export REPOS="$HOME/.Repos"
 export GHREPOS="$REPOS/github.com/$GITUSER"
 export DOTFILES="$GHREPOS/dcyops-quick-install"
